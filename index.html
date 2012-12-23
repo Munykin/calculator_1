@@ -53,7 +53,7 @@
          ],[["-", "-", "-" ,  "-", 3.6 , 4.7 , 8.4 , 8.4 , 12.2, 14.4, 16.7 , 23.3 , 30.0 ],
             ["-", "-", "-" ,  "-", 10.7, 14.0, 25.3, 25.3, 36.7, 43.3, 50.0 , 70.0 , 90.0 ]
          ]]];
-        var outerHTML = '<select id="my_select" name="my_select" size="13">';
+        var outerHTML = '<select id="my_select" name="my_select">';
         $.each(rendered_array[type][material][voltage], function(index,value){
             if((typeof($("#my_select option:selected").val()) === 'undefined') && (index == 0 )){
                 outerHTML += '<option value="'+ index + '" selected>' + value + '</options>'; 
