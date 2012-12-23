@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Модная Лавка</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="js/jquery.js"></script>
+    <script src="js/bootstrap.js"></script>
+</head>
+<body>
+<script type="text/javascript">
+    $(document).ready(function(){
+       //$(".carousel").carousel();
+        $(".addcart").click(function(){
+            var id = $(this).attr("id");
+            $.post("/cart/",{ plugin:"cart", go:"add", id:id },function(data){
+                if(data == 1) {
+                    $(".addcart[id="+id+"]").text("Добавлено в корзину");
+                    var cart = parseInt($("#cart").text())+1;
+                    $("#cart").text(cart);
+                } else {
+                    alert('При добавлении возникла ошибка. Обратитесь к администратору.');
+                }
+            });
+            return false;
+        });
+    });
+</script>
+<div class="container main">
+    <div class="row logo">
+        <div class="span9"><a href="/"><img src="img/logo.png" alt="" /></a></div>
+        <div class="span3">
+            <a href="/cart/">Корзина (<span id="cart">5</span>)</a><br />
+            <a href="/profile/">Профиль</a><br />
+            <a href="/?exit">Выход</a><br />
+        </div>
+    </div>
+    <!--<div class="row">
+        <div class="span12">
+            <div class="navbar">
+                <div class="navbar-inner">
+                    <div class="container">
+                        <ul class="nav topmenu">
+                            <li><a href="/">Главная</a></li>
+                            <li><a href="/pletenaya_mebel/">Плетеная мебель</a></li>
+                            <li><a href="/kovanaya_mebel/">Кованая мебель</a></li>
+                            <li><a href="/mebel_iz_massiva/">Мебель из массива</a></li>
+                            <li><a href="/chasy/">Часы</a></li>
+                            <li><a href="/osveshcenie/">Освещение</a></li>
+                            <li><a href="/oboi/">Обои</a></li>
+                            <li><a href="/dostavka/">Доставка</a></li>
+                            <li><a href="/novosti/">Новости</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="myCarousel" class="carousel slide">
+        <div class="carousel-inner">
+            <div class="active item"><img src="img/1.jpg" alt="" /></div>
+            <div class="item"><img src="img/2.jpg" alt="" /></div>
+            <div class="item"><img src="img/3.jpg" alt="" /></div>
+        </div>
+        <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+        <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
+    </div>-->
+
+    <div class="row custom-header">
+        <div class="span3">
+            <div class="custom-header-left">оформление заказа</div>
+        </div>
+        <div class="span9">
+            <div class="custom-header-right">шаг 2. АВТОРИЗАЦИЯ</div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="span3">
+            <div class="row custom-main-left">
+                    <div class="span3 nav-element">
+                        <div class="span1 nav-element-number">1</div>
+                        <div class="span2 nav-element-text"><a href="#">Состав корзины</a></div>
+                        <div class="row"></div>
+                    </div>
+
+                    <div class="span3 basket-accepted-content">
+                        <div class="basket-accepted-content-element">
+                            <div class="pull-left">Шкаф для белья</div><div class="pull-right">28880 руб.</div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="basket-accepted-content-element">
+                            <div class="pull-left">Шкаф для белья</div><div class="pull-right">28880 руб.</div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="basket-accepted-content-element">
+                            <div class="pull-left">Шкаф для белья</div><div class="pull-right">28880 руб.</div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <hr>
+                        <div class="basket-accepted-content-element">
+                            <div class="clearfix"></div>
+                            <div class="pull-left">Итого</div><div class="pull-right">28880 руб.</div>
+                        </div>
+                    </div>
+
+                    <div class="span3 nav-element">
+                        <div class="span1 nav-element-number nav-element-number_active">2</div>
+                        <div class="span2 nav-element-text nav-element-text_active"><a href="#">Авторизация</a></div>
+                    </div>
+                    <div class="span3 nav-element">
+                        <div class="span1 nav-element-number">3</div>
+                        <div class="span2 nav-element-text"><a href="#">Доставка</a></div>
+                    </div>
+                    <div class="span3 nav-element">
+                        <div class="span1 nav-element-number">4</div>
+                        <div class="span2 nav-element-text"><a href="#">Оплата заказа</a></div>
+                    </div>
+            </div>
+        </div>
+        <div class="span9 custom-main-right">
+            <div class="row">
+                <div class="span9">
+                    <form>
+                        <label class="radio span9">
+                            <input type="radio" name="isregistrated" value="option1" checked>
+                            Я - зарегистрированный покупатель
+                        </label>
+                        <div class="row">
+                            <div class="span9">&nbsp;</div>
+                        </div>
+                        <div class="controls">
+                            <div class="span3">Адресс электронной почты</div>
+                            <div class="span3"><input class="span3" type="text" placeholder="e-mail"></div>
+                        </div>
+                        <div class="controls">
+                            <div class="span3">Пароль</div>
+                            <div class="span3"><input type="password" class="span3" id="inputPassword" placeholder="Password"></div>
+                            <div class="span2 forget-password"><a href="#">Забыли пароль</a></div>
+                        </div>
+
+                        <div class="row">
+                            <div class="span9 bottom-dashed"></div>
+                        </div>
+
+                        <label class="radio span9">
+                            <br>
+                            <input type="radio" name="isregistrated" value="option2">
+                            Я - хочу зарегистрироваться
+                        </label>
+                        <div class="row">
+                            <div class="span9">&nbsp;</div>
+                        </div>
+                        <div class="controls">
+                            <div class="span3">Адресс электронной почты</div>
+                            <div class="span3"><input class="span3" type="text" placeholder="e-mail"></div>
+                            <div class="span5 offset3"><small>Адрес вашей электронной почты будет логином для авторизации в нашем интернет-магазине. На него же будут приходить уведомления об изменении состояний заказов</small></div>
+                        </div>
+                        <div class="controls">
+                            <div class="span3">Пароль</div>
+                            <div class="span3"><input type="password" class="span3" placeholder="Пароль"></div>
+                        </div>
+                        <div class="controls">
+                            <div class="span3">Повтор пароля</div>
+                            <div class="span3"><input type="password" class="span3" placeholder="Повтор пароля"></div>
+                        </div>
+                        <div class="controls">
+                            <div class="span3">Фамилия</div>
+                            <div class="span3"><input class="span3" type="text" placeholder="Фамилия"></div>
+                        </div>
+                        <div class="controls">
+                            <div class="span3">Имя</div>
+                            <div class="span3"><input class="span3" type="text" placeholder="Имя"></div>
+                        </div>
+                        <!--<div class="controls">
+                            <div class="span3">Имя</div>
+                            <div class="span3">
+                                <select class="span3" type="text" placeholder="Имя">
+                                    <option>Женский</option>
+                                    <option>Мужской</option>
+                                    <option>Не традиционный</option>
+                                </select>
+                            </div>
+                        </div>-->
+                    </form>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="span9">&nbsp;</div>
+                <div class="span2"><button type="button" class="btn btn-large"><i class="icon-arrow-left"></i>&nbsp;&nbsp;Назад</button></div>
+                <div class="span2 offset5"><button type="button" class="btn btn-large btn-danger">Далее&nbsp;&nbsp;<i class="icon-arrow-right icon-white"></i></button></div>
+            </div>
+
+            <div class="row">
+                <div class="span9">&nbsp;</div>
+                <div class="span9">&nbsp;</div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container footer">
+    <div class="row">
+        <div class="span12 custom-footer-color">
+            <div class="row">
+                <div class="span2 offset2"><br><a href="">Вопросы и ответы</a><br><a href="">Схема работы</a></div>
+                <div class="span2 offset1"><br><a href="">Об оплате</a><br><a class="" href="">О доставке</a></div>
+                <div class="span3 custom-footer-color-contacts">
+                    <div style="text-decoration: underline">Контакты</div>
+                    <div><i class="icon-user icon-white"></i>(3452) 97-47-44; <i class="icon-user icon-white"></i>8 800 720 72 72</div>
+                    <div>
+                        <i class="icon-envelope icon-white"></i>&nbsp;<span>mlavka@mail.ru</span>&nbsp;<img src="./img/icon_icq.png">&nbsp;<span>icq: 625579340</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row ">
+        <div class="span12">&nbsp;</div>
+    </div>
+    <div class="row ">
+        <div class="span7 offset1">способы обплаты | <img src="./img/oplata.jpg"></div>
+        <div class="span4">способы доставки | <img src="./img/dostavka.jpg"</div>
+    </div>
+    <div class="row ">
+        <div class="span12">&nbsp;</div>
+    </div>
+</div>
+<div class="row">
+    <div class="span12">
+        <div class="navbar">
+            <div class="navbar-inner">
+                <div class="container">
+                    <ul class="nav bottommenu">
+                        <li class="span2"><a href="/">мебель</a></li>
+                        <li class="span2"><a href="/">кухня</a></li>
+                        <li class="span2"><a href="/pletenaya_mebel/">обои</a></li>
+                        <li class="span2"><a href="/kovanaya_mebel/">часы</a></li>
+                        <li class="span2"><input type="text" class="search-query" placeholder="например, кровать"></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="span1"><i class="icon-arrow-up"></i><a href="#" style="text-decoration: underline;">Наверх</a></div>
+    <div class="span3 offset4">©&nbsp;2012&nbsp;Модная лавка</div>
+</div>
+</body>
+</html>

@@ -62,6 +62,10 @@ div.footer {
     border-color:#000000;
 }
 
+.nav-element-text{
+    margin-left:0px;
+}
+
 .nav-element-text > a{
     color: #847b7b;
     padding-left:5px;
@@ -207,9 +211,11 @@ div.footer {
 }
 
 .basket-accepted-content hr {
-    margin:0px 10px 0px 0px;
+    margin: 0px 10px 0px 48px;
+    border-top: 1px solid #AAA;
 }
 
 .basket-accepted-content-element{
     margin-right: 10px;
+    margin-left: 48px;
 }
