@@ -1,0 +1,469 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <title>Title Goes Here</title>
+    <style>
+    .material{
+    }
+    .voltage{
+    }
+    .rated_capacity{
+    }
+    .result{
+        background-color: #FFFFFF;
+    }
+    </style>
+    <script src="jquery-1.8.3.js"></script>
+    <script src="calculator.js"></script>
+</head>
+<body>
+<form>
+<h3>Расчет сечения провода по нагреву и по допустимой потере напряжения с учетом индуктивности линии <font color="red"></font>.</h3>
+
+<table width="720px" border="0px" cellspacing="0" cellpadding="0" marginwidth="0" marginheight="0" bgcolor="CCCCFF">
+<tbody><tr><td colspan="4"><hr></td></tr>
+<tr><td>1. Мощность:</td><td><input class="" type="text" id="P" value="" autocomplete="on" size="8">&nbsp;кВт</td> <td>2. Сosfi: </td><td><input type="text" class="" id="cosfi" value="" autocomplete="on" size="8"></td>
+</tr>
+  <tr><td colspan="4"><hr></td></tr>
+<tr>
+<td>3. Длина</td><td><input class="" type="text" id="L" value="" size="8" autocomplete="on">&nbsp;км</td><td>4. Доп. потери напряжения </td><td><input type="text" id="dU" class="" value="" autocomplete="on" size="8">&nbsp;%</td>
+</tr>
+<tr><td colspan="4">
+<hr>
+<select id="tip" onchange="xxx()"> 
+ <option value="0"> 5. Выберите (провод, кабель или шина). </option>
+  <option class="green" value="1">1.Провода, шнуры и кабели с резиновой или пластмассовой изоляцией. </option>
+  <option class="green" value="2">2.Кабели с бумажной пропитанной изоляцией.  </option>
+  <option class="green" value="3">3.Неизолированные провода и шины.  </option>
+  <option class="green" value="4">4.Провода с изоляцией из сшитого полиэтилена.  </option>
+ </select>
+ 
+ <div id="tooltipmarka1" style="display: none">
+<hr>
+
+<select id="marka1" onchange="xxx()"> 
+  <option value="0">Выберите тип провода или кабеля. </option>
+   <option class="green" value="tabl134">1.Медные с резиновой и ПВХ изоляцией. </option>
+  <option class="green" value="tabl135">2.Алюмин. с резиновой и ПВХ изоляцией. </option>
+  <option class="green" value="tabl136">3.Медные с резин. и ПВХ изол. в метал. защ. оболоч.</option>
+  <option class="green" value="tabl137">4.Алюмин. с резин. и ПВХ изол. в метал. защ. оболоч.</option>
+  <option class="green" value="tabl138">5.Медные шлангов., перенос. кабели, шахтные гибк., прожектор. кабели</option>
+  <option class="green" value="tabl139">6.Медные шланговые с резиновой изоляцией для торфопредприятий. </option>
+  <option class="green" value="tabl1310">7.Медные шланговые с резин. изол. для передв. электроприемников. </option>
+  <option class="green" value="tabl1311">8.Медные с резин. изоляц. для электрифиц. транспорта 1, 3 и 4 кВ. </option>
+  </select>
+</div>
+
+<div id="tooltipsposob1" style="display: none" title="ТАБЛИЦА 1.3.4">
+<hr>
+
+ 
+ <select id="sposob1">
+   <option value="0">Выберите условия прокладки. </option>
+  <option value="Cu_izol_pvx_otkryto">Открыто. </option>
+  <option value="Cu_izol_pvx_v_trube2_1">В трубе ( два одножильных). </option>
+  <option value="Cu_izol_pvx_v_trube3_1">В трубе ( три одножильных). </option>
+  <option value="Cu_izol_pvx_v_trube4_1">В трубе ( четыре одножильных). </option>
+  <option value="Cu_izol_pvx_v_trube_2_1_1">В трубе ( один двухжильный). </option>
+  <option value="Cu_izol_pvx_v_trube_3_1_1">В трубе ( один трехжильный). </option>
+</select>
+
+</div> 
+<div id="tooltipsposob2" style="display: none" title="ТАБЛИЦА 1.3.5">
+<hr>
+ 
+ <select id="sposob2">
+   <option value="0">Выберите условия прокладки. </option>
+  <option value="Al_izol_pvx_otkryto">Открыто. </option>
+  <option value="Al_izol_pvx_v_trube2_1">В трубе ( два одножильных). </option>
+  <option value="Al_izol_pvx_v_trube3_1">В трубе ( три одножильных). </option>
+  <option value="Al_izol_pvx_v_trube4_1">В трубе ( четыре одножильных). </option>
+  <option value="Al_izol_pvx_v_trube_2_1_1">В трубе ( один двухжильный). </option>
+  <option value="Al_izol_pvx_v_trube_3_1_1">В трубе ( один трехжильный). </option>
+</select>
+
+</div>
+<div id="tooltipsposob3" style="display: none" title="ТАБЛИЦА 1.3.6">
+<hr>
+
+ <select id="sposob3">
+   <option value="0">Выберите условия прокладки. </option>
+  <option value="Cu_izol_bron_1zhila_vozd"> Одножильные  открыто </option>
+  <option value="Cu_izol_bron_2zhily_vozd">Двухжильные проложенные в воздухе. </option>
+  <option value="Cu_izol_bron_2zhily_zemlya">Двухжильные провода проложенные в земле. </option>
+  <option value="Cu_izol_bron_3zhily_vozd">Трехжильные проложенные в воздухе. </option>
+  <option value="Cu_izol_bron_3zhily_zemlya">Трехжильные проложенные в земле. </option>
+  <option value="Cu_izol_bron_4zhily_vozd">Четырехжильные проложенные в воздухе. </option>
+   <option value="Cu_izol_bron_4zhily_zemlya">Четырехжильные проложенные в земле. </option>
+</select>
+
+
+
+</div> 
+<div id="tooltipsposob4" style="display: none" title="ТАБЛИЦА 1.3.7">
+<hr>
+ 
+ <select id="sposob4">
+   <option value="0">Выберите условия прокладки. </option>
+   <option value="Al_izol_bron_1zhila_vozd"> Одножильные  открыто </option>
+  <option value="Al_izol_bron_2zhily_vozd">Двухжильные проложенные в воздухе. </option>
+  <option value="Al_izol_bron_2zhily_zemlya">Двухжильные провода проложенные в земле. </option>
+  <option value="Al_izol_bron_3zhily_vozd">Трехжильные проложенные в воздухе. </option>
+  <option value="Al_izol_bron_3zhily_zemlya">Трехжильные проложенные в земле. </option>
+  <option value="Al_izol_bron_4zhily_vozd">Четырехжильные проложенные в воздухе. </option>
+   <option value="Al_izol_bron_4zhily_zemlya">Четырехжильные проложенные в земле. </option>
+</select>
+
+</div>  
+<div id="tooltipsposob5" style="display: none" title="ТАБЛИЦА 1.3.8">
+<hr>
+ 
+ <select id="sposob5">
+   <option value="0">Выберите условия прокладки. </option>
+  <option value="Cu_shlang_1zhila">Одножильные. </option>
+  <option value="Cu_shlang_2zhila">Двухжильные. </option>
+  <option value="Cu_shlang_3zhila">Трехжильные. </option>
+ </select>
+ 
+
+</div> 
+<div id="tooltipsposob6" style="display: none" title="ТАБЛИЦА 1.3.9">
+<hr>
+
+ <select id="sposob6">
+   <option value="0">Выберите величину нарпяжения. </option>
+  <option value="Cu_shlang_torf05">Напряжение 0,5кВ. </option>
+  <option value="Cu_shlang_torf3">Напряжение 3кВ. </option>
+  <option value="Cu_shlang_torf6">Напряжение 6кВ. </option>
+ </select>
+
+</div> 
+<div id="tooltipsposob7" style="display: none" title="ТАБЛИЦА 1.3.10">
+<hr>
+ 
+ <select id="sposob7">
+   <option value="0">Выберите величину нарпяжения. </option>
+  <option value="Cu_shlang_peredv_3">Напряжение 3кВ. </option>
+  <option value="Cu_shlang_peredv_6">Напряжение 6кВ. </option>
+  </select>
+
+ 
+</div> 
+<div id="tooltipsposob8" style="display: none" title="ТАБЛИЦА 1.3.11">
+<hr>
+ 
+ <select id="sposob8">
+   <option value="0">Выберите условия прокладки. </option>
+  <option value="Cu_elektrificir">Провода под напряжением 1,3,4 кВ </option>
+ </select>
+</div> 
+
+<div id="tooltipmarka2" style="display: none">
+<hr>
+
+<select id="marka2" onchange="xxx()"> 
+  <option value="0">Выберите тип провода или кабеля. </option>
+   <option class="green" value="tabl1313">1.Медные с бумажной маслоканифольной в свинцовой оболочке, в земле.  </option>
+   <option class="green" value="tabl1314">2.Медные с бумажной маслоканифольной в свинцовой оболочке, в воде.  </option>
+   <option class="green" value="tabl1315">3.Медные с бумажной маслоканифольной в свинцовой оболочке, в воздухе.  </option>
+   <option class="green" value="tabl1316">4.Алюм. с бумажной маслоканифольной в свинцовой оболочке, в земле.  </option>
+   <option class="green" value="tabl1317">5.Алюм. с бумажной маслоканифольной в свинцовой оболочке, в воде.  </option>
+   <option class="green" value="tabl1318">6.Алюм. с бумажной маслоканифольной в свинцовой оболочке, в воздухе.  </option>
+   <option class="green" value="tabl1319">7.Медные трехжильные напр. 6 кВ в общей свинц. обол, в земле и воздухе. </option>
+   <option class="green" value="tabl1320">8.Алюм. трехжильные напр. 6 кВ алюмин. в общей свинц. обол, в земле и воздухе.  </option>
+   <option class="green" value="tabl1321">9.Медные отдельно освинцов. с бум. изол., в земле, воде, воздухе.   </option>
+   <option class="green" value="tabl1322">10.Алюм. отдельно освинцов. с бум .изол., в земле, воде, воздухе.   </option>
+  </select>
+</div>
+<div id="tooltipsposob9" style="display: none" title="ТАБЛИЦА 1.3.13">
+<hr>
+
+ <select id="sposob9">
+   <option value="0">Выберите условия прокладки. </option>
+  <option value="Cu_maslo_bron_1_zemlya">Одножильные до 1 кВ в земле. </option>
+  <option value="Cu_maslo_bron_2_zemlya">Двухжильные до 1 кВ в земле. </option>
+  <option value="Cu_maslo_bron_3_zemlya_3kV">Трехжильные до 3 кВ в земле. </option>
+  <option value="Cu_maslo_bron_3_zemlya_6kV">Трехжильные  6 кВ в земле. </option>
+  <option value="Cu_maslo_bron_3_zemlya_10kV">Трехжильные  10 кВ в земле. </option>
+  <option value="Cu_maslo_bron_4_zemlya_10kV"> Четырехжильные до 1 кВ в земле.</option>
+ </select>
+</div>
+<div id="tooltipsposob10" style="display: none" title="ТАБЛИЦА 1.3.14">
+<hr>
+ 
+ <select id="sposob10">
+   <option value="0">Выберите условия прокладки. </option>
+  <option value="Cu_maslo_bron_3_voda_3kV"> Ттрехжильные до 3 кВ в воде.</option>
+  <option value="Cu_maslo_bron_3_voda_6kV">Трехжильные до 6 кВ в воде.</option>
+  <option value="Cu_maslo_bron_3_voda_10kV">Трехжильных до 10 кВ в воде. </option>
+  <option value="Cu_maslo_bron_3_voda_1kV">Четырехжильные  до 1 кВ в воде. </option>
+   </select>
+</div>
+
+<div id="tooltipsposob11" style="display: none" title="ТАБЛИЦА 1.3.15">
+<hr>
+
+ <select id="sposob11">
+   <option value="0">Выберите условия прокладки. </option>
+  <option value="Cu_maslo_bron_1_vozdux_1kV">Одножильные до 1 кВ в воздухе. </option>
+  <option value="Cu_maslo_bron_2_vozdux_1kV"> Двухжильные до 1 кВ в воздухе.</option>
+  <option value="Cu_maslo_bron_3_vozdux_3kV">Трехжильные до 3 кВ в воздухе. </option>
+  <option value="Cu_maslo_bron_3_vozdux_6kV">Трехжильные 6 кВ в воздухе. </option>
+  <option value="Cu_maslo_bron_4_vozdux_1kV"> Четырехжильные 1 кВ в воздухе.</option>
+</select>
+</div>
+
+
+<div id="tooltipsposob12" style="display: none" title="ТАБЛИЦА 1.3.16">
+<hr>
+ 
+ <select id="sposob12">
+   <option value="0">Выберите условия прокладки. </option>
+  <option value="Al_maslo_bron_1_zemlya">Одножильные до 1 кВ в земле.</option>
+  <option value="Al_maslo_bron_2_zemlya">Двухжильные до 1 кВ в земле. </option>
+  <option value="Al_maslo_bron_3_zemlya_3kV">Трехжильные до 3 кВ в земле. </option>
+  <option value="Al_maslo_bron_3_zemlya_6kV">Трехжильные  6 кВ в земле. </option>
+  <option value="Al_maslo_bron_4_zemlya_10kV"> Четырехжильные до 1 кВ в земле.</option>
+</select>
+</div>
+
+<div id="tooltipsposob13" style="display: none" title="ТАБЛИЦА 1.3.17">
+<hr>
+ 
+ <select id="sposob13">
+   <option value="0">Выберите условия прокладки. </option>
+  <option value="Al_maslo_bron_3_voda_3kV"> Трехжильные до 3 кВ в воде.</option>
+  <option value="Al_maslo_bron_3_voda_6kV"> Трехжильные 6 кВ в воде.</option>
+  <option value="Al_maslo_bron_3_voda_10kV">Трехжильные 10 кВ в воде </option>
+  <option value="Al_maslo_bron_3_voda_1kV">Четырехжильные до 1 кВ в воде. </option>
+</select>
+</div>
+<div id="tooltipsposob14" style="display: none" title="ТАБЛИЦА 1.3.18">
+<hr>
+
+ <select id="sposob14">
+   <option value="0">Выберите условия прокладки. </option>
+  <option value="Al_maslo_bron_1_vozdux_1kV">Одножильные до 1 кВ в воздухе. </option>
+  <option value="Al_maslo_bron_2_vozdux_1kV">Двухжильные до 1 кВ в воздухе. </option>
+  <option value="Al_maslo_bron_3_vozdux_3kV"> Трехжильные до 3 кВ в воздухе.</option>
+  <option value="Al_maslo_bron_3_vozdux_6kV">Трехжильные  6 кВ в воздухе. </option>
+  <option value="Al_maslo_bron_3_vozdux_10kV">Трехжильные 10 кВ в воздухе. </option>
+  <option value="Al_maslo_bron_4_vozdux_1kV">Четырехжильные  1 кВ в воздухе.</option>
+ </select>
+</div>
+
+
+<div id="tooltipsposob15" style="display: none" title="ТАБЛИЦА 1.3.19">
+<hr>
+ 
+ <select id="sposob15">
+   <option value="0">Выберите условия прокладки. </option>
+  <option value="Cu_maslo_bron_3z_6kV">Трехжильные 6 кВ в земле</option>
+  <option value="Cu_maslo_bron_3v_6kV">Двухжильные 6 кВ в воздухе </option>
+ </select>
+</div>
+
+<div id="tooltipsposob16" style="display: none" title="ТАБЛИЦА 1.3.20">
+<hr>
+ 
+ <select id="sposob16">
+   <option value="0">Выберите условия прокладки. </option>
+  <option value="Al_maslo_bron_3z_6kV">Трехжильные 6 кВ в земле. </option>
+  <option value="Al_maslo_bron_3v_6kV">Двухжильные 6 кВ в воздухе. </option>
+ </select>
+</div>
+
+<div id="tooltipsposob17" style="display: none" title="ТАБЛИЦА 1.3.21">
+<hr>
+
+ <select id="sposob17">
+   <option value="0">Выберите условия прокладки.  </option>
+  <option value="Cu_maslo_bron_3z_20kV">Трехжильные 20 кВ в земле. </option>
+  <option value="Cu_maslo_bron_3voda_20kV"> Трехжильные 20 кВ в воде.</option>
+  <option value="Cu_maslo_bron_3vozd_20kV">Трехжильные 20 кВ в воздухе. </option>
+  <option value="Cu_maslo_bron_3z_35kV"> Трехжильные 35 кВ в земле.</option>
+  <option value="Cu_maslo_bron_3voda_35kV"> Трехжильные 35 кВ в воде</option>
+  <option value="Cu_maslo_bron_3vozd_35kV">Трехжильные 35 кВ в воздухе</option>
+ </select>
+</div>
+
+<div id="tooltipsposob18" style="display: none" title="ТАБЛИЦА 1.3.22">
+<hr>
+ 
+ <select id="sposob18">
+   <option value="0">Выберите условия прокладки.  </option>
+  <option value="Al_maslo_bron_3z_20kV"> Трехжильные 20 кВ в земле.</option>
+  <option value="Al_maslo_bron_3voda_20kV">Трехжильные 20 кВ в воде. </option>
+  <option value="Al_maslo_bron_3vozd_20kV">Двухжильные 20 кВ в воздухе. </option>
+  <option value="Al_maslo_bron_3z_35kV">Трехжильные 35 кВ в земле. </option>
+  <option value="Al_maslo_bron_3voda_35kV"> Трехжильные 35 кВ в воде.</option>
+  <option value="Al_maslo_bron_3vozd_35kV">Двухжильные 35 кВ в воздухе.</option>
+ </select>
+</div>
+
+<div id="tooltipmarka3" style="display: none">
+<hr>
+
+<select id="marka3" onchange="xxx()"> 
+  <option value="0">Выберите тип провода или шины. </option>
+   <option value="tabl1329">Неизолированные провода по ГОСТ 839-80 </option>
+   <option value="tabl1331">Шины прямоугольного сечения. </option>
+  
+  </select>
+</div>
+
+
+  <div id="tooltipsposob19" style="display: none" title="ТАБЛИЦА 1.3.29">
+<hr>
+
+ <select id="sposob19">
+   <option value="0">Выберите условия прокладки. </option>
+  <option value="Al_neizol_provod_AS_vne">Вне помещений АС, АСКС, АСК, АСКП. </option>
+  <option value="Al_neizol_provod_AS_vnutri"> Внутри помещений АС, АСКС, АСК, АСКП. </option>
+  <option value="Cu_neizol_provod_M_vne"> Вне помещений М.</option>
+  <option value="Al_neizol_provod_A_AKP_vne"> Вне помещений А, АКП.</option>
+  <option value="Cu_neizol_provod_M_vnutri"> Внутри помещений М. </option>
+  <option value="Al_neizol_provod_A_AKP_vnutri">Внутри помещений А и АКП.</option>
+ </select>
+</div> 
+
+  <div id="tooltipsposob20" style="display: none" title="ТАБЛИЦА 1.3.31">
+<hr>
+
+ <select id="sposob20">
+   <option value="0">Выберите материал и количество шин. </option>
+  <option value="Cu_neizol_shina_pryamoug1">Медные шины 1 шт на фазу или полюс. </option>
+   <option value="Cu_neizol_shina_pryamoug2">Медные шины 2 шт на фазу или полюс. </option>
+   <option value="Cu_neizol_shina_pryamoug3">Медные шины 3 шт на фазу или полюс. </option>
+   <option value="Cu_neizol_shina_pryamoug4">Медные шины 4 шт на фазу или полюс. </option>
+   <option value="Al_neizol_shina_pryamoug1">Алюминиевые шины 1 шт на фазу или полюс. </option>
+   <option value="Al_neizol_shina_pryamoug2">Алюминиевые шины 2 шт на фазу или полюс. </option>
+   <option value="Al_neizol_shina_pryamoug3">Алюминиевые шины 3 шт на фазу или полюс. </option>
+   <option value="Al_neizol_shina_pryamoug4">Алюминиевые шины 4 шт на фазу или полюс. </option>
+
+ </select>
+</div> 
+<div id="tooltipmarka4" style="display: none">
+<hr>
+
+<select id="marka4" onchange="xxx()"> 
+  <option value="0">Выберите марку провода. </option>
+   <option value="tabl24">СИП-3 </option>
+  <option value="tabl241">СИП-4 </option>
+  
+  </select>
+</div>
+
+
+  <div id="tooltipsposob21" style="display: none" title="ТАБЛИЦА 2.4 ENSTO">
+<hr>
+ 
+ <select id="sposob21">
+   <option value="0">Выберите условия прокладки. </option>
+  <option value="Al_SIP3">Открыто. </option>
+  
+ 
+ </select>
+</div> 
+  <div id="tooltipsposob22" style="display: none" title="ТАБЛИЦА 2.41 ENSTO">
+<hr>
+
+ <select id="sposob22">
+   <option value="0">Выберите условия прокладки. </option>
+  <option value="Al_SIP4">Открыто. </option>
+  
+ 
+ </select>
+</div> 
+
+ 
+</td></tr>
+
+<tr><td colspan="4"><hr></td></tr>
+<tr><td colspan="3">6. Выберите номинальное напряжение:</td><td><select id="U" onchange="xxxx()">
+  <option value="0.22">0.22</option>
+  <option value="0.38">0.38</option>
+  <option value="0.66">0.66</option>
+  <option value="6">6</option>
+  <option value="10">10</option>
+</select>&nbsp;кВ<br></td></tr>
+<tr><td colspan="4"><hr></td></tr>
+<tr><td colspan="3">7. Выберите количество фаз:</td> <td><select id="faza">
+  <option value="1">1фаза</option>
+  <option value="3">3фазы</option>
+  <!-- <option value="2">Ответвление однофазное от четырехпроводной линии.</option>
+  <option value="4">Ответвление трехфазное от четырехпроводной линии.</option>-->
+ </select></td></tr>
+<tr><td colspan="4"><hr></td></tr>
+<tr><td colspan="3">8. Выберите материал проводника:<br></td>
+<td><select id="gamma">
+  <option value="Al">Алюминий&nbsp;</option>
+  <option value="Cu">Медь</option>
+ </select><br></td></tr>
+<tr><td colspan="4"><hr></td></tr>
+<tr><td colspan="3">9. Выберите тип линии:<br></td>
+<td><select id="lep">
+  <option value="Vl">ВЛ</option>
+  <option value="Kl">КЛ</option>
+ </select><br></td></tr>
+<tr><td colspan="4"><hr></td></tr>
+<tr><td colspan="4">10. Выберите назначение линии:
+<select id="lepn">
+  <option value="0">Не определено</option>
+  <option value="4">Кабельная линия до 1 кВ.</option>
+  <option value="10">Кабельная линия 6 кВ.</option>
+  <option value="16">Кабельная линия 10 кВ.</option>
+  <option value="35">ВЛ без пересеч. гололедн. стенки до 10 мм</option>
+  <option value="50">ВЛ без пересеч. гололедн. стенки 15 и более</option>
+  <option value="70">ВЛ пересеч с рекой гололедн. стенки до 10 мм</option>
+  <option value="70">ВЛ пересеч с рекой гололедн. стенки 15 и более</option>
+  <option value="70">ВЛ пересеч с линиями связи </option>
+  <option value="70">ВЛ пересеч с надз. трубопроводом.</option>
+  <option value="35">ВЛ пересеч с Ж/д  гололедн. стенки до 10 мм</option>
+  <option value="50">ВЛ пересеч с Ж/д  гололедн. стенки 15 и более</option>
+ </select><br></td></tr>
+ <tr><td colspan="4"><hr></td></tr>
+ <tr><td colspan="4">
+        <div id="paralel" style="display: none" title="">
+       11. Если сечение провода велико Проложить в параллель:
+           <select id="par">
+         <option value="1">1</option>
+             <option value="2">2</option>
+             <option value="3">3</option>
+             <option value="4">4</option>
+             </select>&nbsp;шт.<br>
+           </div>
+ </td></tr>
+<tr><td colspan="4"><hr></td></tr>
+<tr><td colspan="3"></td><td><input type="button" id="calc_button" value="Расчёт" class="raschet" onclick="calculate()"></td></tr>
+<tr><td colspan="3">Расчетное сечение проводника по потере напряжения:</td><td><input type="text" id="F" value="" size="6" disabled="">&nbsp;мм<sup>2</sup></td></tr>
+<tr><td colspan="3">Расчетное сечение проводника по нагреву:</td><td><input type="text" id="FN" value="" size="6" disabled="">&nbsp;мм<sup>2</sup></td></tr>
+<tr><td colspan="4">
+                 <div id="tooltipshina" style="display: none" title="">
+                <table>
+              <tbody><tr><td width="520px">Выбранные размеры шин:&nbsp;мм<br><br></td><td><input class="rezultat" type="text" id="Razm" value="" size="3" disabled=""></td></tr><tr>
+                           </tr><tr><td>Выбранные сечение шины:&nbsp;мм<sup>2</sup><br></td><td><input class="rezultat" type="text" id="Sh" value="" size="3" disabled=""></td></tr><tr>
+                        </tr></tbody></table>
+           </div>
+</td></tr>
+
+<tr><td colspan="4">
+                  <div id="tooltipprovod" style="display: block" title="">
+              <table>
+              <tbody><tr><td width="520px">Выбранное сечение проводника:&nbsp;мм<sup>2</sup></td><td><input class="rezultat" type="text" id="Fv" value="" size="3" disabled=""></td></tr>
+                      
+            </tbody></table>
+         </div>
+</td></tr>
+<tr><td colspan="3">Расчетная величина потери напряжения:</td><td><input type="text" id="dUap" value="" size="6" disabled="">&nbsp;%</td></tr>
+<tr><td colspan="3">Расчетный ток:</td><td><input type="text" id="Id" value="" size="6" disabled="">&nbsp;А</td></tr>
+<tr><td colspan="3">Допустимый ток для выбранного сечения</td><td><input type="text" id="Idop" value="" size="6" disabled="">&nbsp;А</td></tr>
+<tr>
+<td colspan="4"><input type="button" id="calc_reset" value="Сброс" onclick="calculate0()"></td>
+</tr>
+<tr><td colspan="4"><hr></td></tr>
+</tbody></table>
+</form>
+</body>
+</html>
