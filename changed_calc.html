@@ -3,21 +3,45 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Untitled Document</title>
+  <script src="jquery-1.8.3.js"></script>
+
 </head>
 
 <body>
 <form style="margin-left:70px;"> 
 <table style="padding: 5px; border: 1px dotted #dcdcdc; background-color: #f9f9f9; border-radius: 10px; " border="0">
 <tbody>
+
 <tr>
-<td width="300">Введите мощность:</td>
-<td width="180"><input id="P" size="10" type="text" /> кВт<br /></td>
+  <td colspan="2">
+    Вычислить по:<br>
+      <div style="float: left;margin-top: 3px;"><input type="radio" name="calc_type" value="1" checked></div><div style="">силе тока</div>
+      <div style="float: left;margin-top: 3px;"><input type="radio" name="calc_type" value="2"></div><div>мощности</div>
+  </td>
 </tr>
+
 <tr>
-<td colspan="2">
-<hr style="border-bottom:dotted 1px #dcdcdc; border-left:none; border-right:none; border-top:none;" />
-</td>
+  <td colspan="2">
+  <hr style="border-bottom:dotted 1px #dcdcdc; border-left:none; border-right:none; border-top:none;" />
+  </td>
 </tr>
+
+<tr>
+  <td width="300">Сила тока:</td>
+  <td width="180"><input id="voltage" size="10" type="text" /> A<br /></td>
+</tr>
+
+<tr>
+  <td width="300">Введите мощность:</td>
+  <td width="180"><input id="P" size="10" type="text" disabled="disabled"/> кВт<br /></td>
+</tr>
+
+<tr>
+  <td colspan="2">
+    <hr style="border-bottom:dotted 1px #dcdcdc; border-left:none; border-right:none; border-top:none;" />
+  </td>
+</tr>
+
 <tr>
 <td>Введите длину кабельной линии:</td>
 <td><input id="L" size="10" type="text" /> м</td>
@@ -85,6 +109,7 @@
 </tr>
 </tbody>
 </table>
-</form>
+</form>  
+<script src="calculator.js"></script>
 </body>
 </html>
