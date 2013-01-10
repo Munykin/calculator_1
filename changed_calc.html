@@ -1,66 +1,90 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8">
-    <title>Title Goes Here</title>
-    <script src="jquery-1.8.3.js"></script>
-    <script src="calculator.js"></script>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Untitled Document</title>
 </head>
+
 <body>
-<form>
-
-<table class="poteri_napr" style="
-    padding: 5px;
-    border: 5px dashed orange;
-    border-radius: 10px;
-    background-color: #EFEFEF;
-">
-<tbody><tr><td>1. Введите мощность:</td><td><input type="text" id="P" value="" autocomplete="on" size="8" placeholder="Введите мощность">&nbsp;кВт<br>
-
-</td></tr>
-
-
-  <tr><td colspan="2"><hr style="border-color: orange;"></td></tr>
-<tr><td>2. Введите длину участка ВЛ КЛ:</td><td><input type="text" id="L" value="" size="8" autocomplete="on" placeholder="Введите длину">&nbsp;м</td></tr>
- <input type="hidden" id="par" value="1">
-<tr><td colspan="2"><hr style="border-color: orange;"></td></tr>
-<tr><td>3. Выберите номинальное напряжение:</td><td><select id="U" onchange="xxxx()">
-  <option value="0.22">0.22</option>
-  <option value="0.38">0.38</option>
-  <option value="0.66">0.66</option>
-  <option value="6">6</option>
-  <option value="10">10</option>
-</select>&nbsp;кВ<br></td></tr>
-<tr><td colspan="2"><hr style="border-color: orange;"></td></tr>
-<tr><td>4. Выберите количество фаз:</td><td>
-   <select id="faza">
-  <option value="1">1 фаза</option>
-  <option value="3">3 фазы</option>
- </select>
-   <p></p></td><td>
-  </td></tr>
-<tr><td>5. Выберите материал проводника:<br></td>
-<td><select id="gamma">
-  <option value="Al">Алюминий</option>
-  <option value="Cu">Медь</option>
- </select><br></td></tr>
-<tr><td colspan="2"><hr style="border-color: orange;"></td></tr>
-<input type="hidden" id="dU" value="5">
-<tr><td>6. Выберите назначение линии:<br>
-<select id="lepn">
-  <option value="0">Не определено</option>
-  <option value="4">Кабельная линия до 1 кВ.</option>
-  <option value="10">Кабельная линия 6 кВ.</option>
-  <option value="16">Кабельная линия 10 кВ.</option>
- </select><br></td></tr>
-<tr><td colspan="2"><hr style="border-color: orange;"></td></tr>
-<tr><td colspan="2"><h3>Результаты вычисления</h3></td></tr>
-<tr><td></td><td><input type="button" id="calc_button" value="Расчёт" class="raschet" onclick="calculate()"></td></tr>
-<tr><td>Расчетное сечение проводника:</td><td><input type="text" id="S" value="" size="6" disabled="">&nbsp;мм<sup>2</sup></td></tr>
-<tr><td>Выбранное сечение проводника:</td><td><input type="text" id="Sv" value="" size="6" disabled="">&nbsp;мм<sup>2</sup></td></tr>
-<!--<tr><td>Выбранное значение альфа:</td><td><input type="text" id="alfa" value="" />&nbsp;мм<sup>2</sup><br></td></tr>-->
-<tr><td><input type="button" id="calc_reset" value="Сброс" onclick="calculate0()"><br></td><td><input type="button" id="calc_button" value="Расчёт" onclick="calculate()"></td></tr>
-</tbody></table>
+<form style="margin-left:70px;"> 
+<table style="padding: 5px; border: 1px dotted #dcdcdc; background-color: #f9f9f9; border-radius: 10px; " border="0">
+<tbody>
+<tr>
+<td width="300">Введите мощность:</td>
+<td width="180"><input id="P" size="10" type="text" /> кВт<br /></td>
+</tr>
+<tr>
+<td colspan="2">
+<hr style="border-bottom:dotted 1px #dcdcdc; border-left:none; border-right:none; border-top:none;" />
+</td>
+</tr>
+<tr>
+<td>Введите длину кабельной линии:</td>
+<td><input id="L" size="10" type="text" /> м</td>
+</tr>
+<input id="par" type="hidden" value="1" /> 
+<tr>
+<td colspan="2">
+<hr style="border-bottom:dotted 1px #dcdcdc; border-left:none; border-right:none; border-top:none;" />
+</td>
+</tr>
+<tr>
+<td>Выберите номинальное напряжение:</td>
+<td><select id="U"> <option value="0.22">220 B</option> <option value="0.38">380 B</option> <option value="0.66">660 B</option> <option value="6">6 kB</option> <option value="10">10 kB</option> </select><br /></td>
+</tr>
+<tr>
+<td colspan="2">
+<hr style="border-bottom:dotted 1px #dcdcdc; border-left:none; border-right:none; border-top:none;" />
+</td>
+</tr>
+<tr>
+<td>Укажите число фаз:</td>
+<td><select id="faza"> <option value="1">1</option> <option value="3">3</option> </select></td>
+</tr>
+<tr>
+<td colspan="2">
+<hr style="border-bottom:dotted 1px #dcdcdc; border-left:none; border-right:none; border-top:none;" />
+</td>
+</tr>
+<tr>
+<td>Выберите материал жилы:</td>
+<td><select id="gamma"> <option value="Al">Алюминий (Al)</option> <option value="Cu">Медь (Cu)</option> </select><br /></td>
+</tr>
+<tr>
+<td colspan="2">
+<hr style="border-bottom:dotted 1px #dcdcdc; border-left:none; border-right:none; border-top:none;" />
+</td>
+</tr>
+<input id="dU" type="hidden" value="5" /> 
+<tr>
+<td>Укажите тип линии:</td>
+<td><select id="lepn"> <option value="0">Не определено</option> <option value="4">Кабельная линия до 1 kB</option> <option value="10">Кабельная линия 6 kB</option> <option value="16">Кабельная линия 10 kB</option> </select><br /></td>
+</tr>
+<tr>
+<td colspan="2">
+<hr style="border-bottom:dotted 1px #dcdcdc; border-left:none; border-right:none; border-top:none;" />
+</td>
+</tr>
+<tr>
+<td colspan="2" align="center">
+<p>Результаты вычисления</p>
+<br /></td>
+</tr>
+<tr>
+<td>Расчетное сечение жилы:</td>
+<td><input type="text" id="S" value="" size="10" disabled="disabled" /> 
+  мм<sup>2</sup></td>
+</tr>
+<tr>
+<td>Рекомендуемое сечение:</td>
+<td><input type="text" disabled="disabled" id="Sv" value="" size="10" /> 
+  мм<sup>2</sup></td>
+</tr>
+<tr>
+<td><input id="calc_button" onclick="calculate()" type="button" value="Рассчитать" /></td>
+</tr>
+</tbody>
+</table>
 </form>
 </body>
 </html>
