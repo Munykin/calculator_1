@@ -3,19 +3,25 @@ $("input[name=calc_type]").click(function() {
   	$("#P").prop('disabled', this.value=="1");
   	$("#voltage").prop('disabled', this.value=="2");
 });
-$("#voltage").keydown(function() {//нажатия по инпуту с силой тока
-  var P = $("#P");//мощность
-  var U = $("#U");//напряжение
-  console.log(parseFloat(this.value) * parseFloat(U.val()));
-  P.val(parseFloat(this.value) * parseFloat(U.val()));
-});
-$("#voltage").keydown(function() {//нажатия по инпуту с силой тока
+$("#voltage").keyup(function() {//нажатия по инпуту с силой тока
   var P = $("#P");//мощность
   var U = $("#U");//напряжение
   P.val(parseFloat(this.value) * parseFloat(U.val()));
 });
-$("#P").keydown(function() {//нажатия по инпуту с мощность.
+$("#P").keyup(function() {//нажатия по инпуту с мощность.
   var A = $("#voltage");//сила тока
   var U = $("#U");//напряжение
+  console.log(parseFloat(U.val()));
   A.val(parseFloat(this.value) / parseFloat(U.val()));
+});
+$("#U").change(function(){
+  var A = $("#voltage");//сила тока
+  var U = this;//напряжение
+  var P = $("#P");//мощность
+  //P.val(parseFloat(A.value) * parseFloat(U.value));
+  if($("input[name=calc_type]:checked").val()=="2"){
+    A.val(parseFloat(P.val()) / parseFloat(U.value));
+  } else {
+    P.val(parseFloat(A.val()) * parseFloat(U.value));
+  }
 });
